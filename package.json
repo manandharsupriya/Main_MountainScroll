@@ -14,9 +14,7 @@
   "type": "module",
   "dependencies": {
     "gsap": "^3.13.0",
-    "three": "^0.179.1"
-  },
-  "devDependencies": {
+    "three": "^0.179.1",
     "vite": "^7.0.6"
   }
 }
