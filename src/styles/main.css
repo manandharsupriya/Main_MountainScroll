@@ -1,0 +1,315 @@
+/* ===== Custom Properties & Design Tokens ===== */
+:root {
+  --font-palanquin: 'Palanquin', sans-serif;
+  --color-dark-bg: #222222;
+  --color-light-bg: #ffffff;
+  --color-accent: #15776a;
+  --glow-shadow: 0 0 24px rgba(0, 0, 0, 0.85), 0 2px 10px rgba(0, 0, 0, 0.75), 0 0 40px rgba(0, 0, 0, 0.5);
+  --subtle-shadow: 0 0 16px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+/* ===== Base Page Styles ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-palanquin);
+  background: #111111;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== GPU-Accelerated Progress Bar ===== */
+#progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  pointer-events: none;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--color-accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* ===== Crossfading HTML Background Layers ===== */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* ===== Canvas for 3D Scene (Fixed & Transparent) ===== */
+#three-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: transparent !important;
+  pointer-events: none;
+}
+
+/* ===== Fixed Overlay UI Container ===== */
+#info-container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ===== Full Coverage Section (Solid Screen Overlay, Hides 3D Mountain) ===== */
+.fullcover-display {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fullcover-bg, #F6F4EE);
+  color: #1c1a17;
+  pointer-events: auto;
+  opacity: 0;
+  will-change: opacity, transform;
+  padding: clamp(2rem, 5vh, 4rem) clamp(1.5rem, 5vw, 4rem);
+  overflow-y: auto;
+}
+
+.fullcover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 780px;
+  width: 100%;
+  margin: auto;
+}
+
+.fullcover-content img {
+  width: 100%;
+  max-width: 580px;
+  max-height: 48vh;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+  margin-bottom: clamp(1.25rem, 2.5vh, 2rem);
+}
+
+.fullcover-content h1,
+.fullcover-content h2 {
+  font-family: var(--font-palanquin);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.5vw + 0.5rem, 2.75rem);
+  line-height: 1.2;
+  color: #1c1a17;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.fullcover-content p {
+  font-family: var(--font-palanquin);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.2vw + 0.75rem, 1.35rem);
+  line-height: 1.5;
+  color: #2b2825;
+  margin: 0 0 1rem 0;
+  max-width: 680px;
+  text-align: center;
+}
+
+/* ===== Scroll Section Tracks ===== */
+.scroll-section {
+  position: relative;
+  height: 180vh; /* Controlled dynamically by sections.json */
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ===== Hero Title (Screen Center) ===== */
+#section00 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 0;
+}
+
+.hero-title {
+  font-family: var(--font-palanquin);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 6vw + 0.5rem, 4.5rem);
+  line-height: 1.15;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0 1.5rem;
+  text-shadow: var(--glow-shadow);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+/* ===== Subheading Section (Screen Center Anchor, Glides Vertically) ===== */
+.subheading-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: min(90vw, 840px);
+  padding: 0 1.5rem;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.section-subheading {
+  font-family: var(--font-palanquin);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3.5vw + 0.5rem, 2.75rem);
+  line-height: 1.25;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  text-shadow: var(--glow-shadow);
+}
+
+.section-subheading-note {
+  font-family: var(--font-palanquin);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.5vw + 0.5rem, 1.35rem);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  margin: 0.75rem 0 0 0;
+  text-shadow: var(--subtle-shadow);
+}
+
+/* ===== Infobox Dock (Vertically Centered Anchor for Upward Travel) ===== */
+.infobox-dock {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  padding: 0 1.25rem;
+  pointer-events: none;
+}
+
+.infobox {
+  position: relative;
+  width: min(100%, 640px);
+  padding: clamp(1.25rem, 2.5cqi + 1rem, 2rem);
+  border-radius: 14px;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(34vh);
+  will-change: transform, opacity;
+  container-type: inline-size;
+}
+
+/* ===== Light Infobox Theme ===== */
+.infobox.theme-light {
+  background: var(--color-light-bg);
+  color: #1a1a1a;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.infobox.theme-light h1,
+.infobox.theme-light h2,
+.infobox.theme-light .infobox-heading {
+  font-family: var(--font-palanquin);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.5cqi + 0.85rem, 1.5rem);
+  line-height: 1.2;
+  color: #111111;
+  text-align: left;
+  margin: 0 0 0.6rem 0;
+}
+
+.infobox.theme-light p,
+.infobox.theme-light .infobox-content,
+.infobox.theme-light b {
+  font-family: var(--font-palanquin);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.2cqi + 0.75rem, 1.5rem);
+  line-height: 1.2;
+  color: #1a1a1a;
+  text-align: left;
+  margin: 0;
+}
+
+/* ===== Dark Infobox Theme ===== */
+.infobox.theme-dark {
+  background: var(--color-dark-bg);
+  color: #ffffff;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.infobox.theme-dark h1,
+.infobox.theme-dark h2,
+.infobox.theme-dark .infobox-heading {
+  font-family: var(--font-palanquin);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.5cqi + 0.85rem, 1.5rem);
+  line-height: 1.2;
+  color: #ffffff;
+  text-align: left;
+  margin: 0 0 0.6rem 0;
+}
+
+.infobox.theme-dark p,
+.infobox.theme-dark .infobox-content,
+.infobox.theme-dark b {
+  font-family: var(--font-palanquin);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.2cqi + 0.75rem, 1.5rem);
+  line-height: 1.2;
+  color: #f5f5f5;
+  text-align: left;
+  margin: 0;
+}
+
+/* Images inside infoboxes */
+.infobox img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.75rem 0;
+}
+
+/* Motion sensitivity safety */
+@media (prefers-reduced-motion: reduce) {
+  .infobox, .subheading-display, #progress-bar {
+    transition: none !important;
+    transform: none !important;
+  }
+}

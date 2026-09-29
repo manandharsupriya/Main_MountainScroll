@@ -1,0 +1,22 @@
+{
+  "name": "scrollytest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "vite": "^7.0.6"
+  }
+}
