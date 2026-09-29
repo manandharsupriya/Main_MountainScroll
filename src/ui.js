@@ -53,7 +53,7 @@ export function setupUI(sections) {
   sections.forEach((section) => {
     const htmlFile = section.infoboxHtml || section.contentHtml || section.html;
     if (htmlFile) {
-      const url = `/infoboxes/${htmlFile}`;
+      const url = `${import.meta.env.BASE_URL}infoboxes/${htmlFile}`;
       fetch(url)
         .then((res) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -62,14 +62,7 @@ export function setupUI(sections) {
         .then((html) => {
           htmlCache[section.id] = html;
         })
-        .catch(() => {
-          fetch(`/public/infoboxes/${htmlFile}`)
-            .then((res) => res.text())
-            .then((html) => {
-              htmlCache[section.id] = html;
-            })
-            .catch((err) => console.warn(`Could not load HTML for ${section.id}:`, err));
-        });
+        .catch((err) => console.warn(`Could not load HTML for ${section.id}:`, err));
     }
   });
 }
@@ -131,12 +124,16 @@ export function updateUIProgress(activeSection, progress, scrollY) {
         if (cachedHtml) {
           fullcoverContent.innerHTML = cachedHtml;
         } else {
-          fetch(`/infoboxes/${htmlFile}`)
-            .then((res) => res.text())
+          fetch(`${import.meta.env.BASE_URL}infoboxes/${htmlFile}`)
+            .then((res) => {
+              if (!res.ok) throw new Error(`HTTP ${res.status}`);
+              return res.text();
+            })
             .then((html) => {
               htmlCache[activeSection.id] = html;
               fullcoverContent.innerHTML = html;
-            });
+            })
+            .catch((err) => console.warn(`Could not load fullcover HTML:`, err));
         }
       }
     }
@@ -229,12 +226,16 @@ export function updateUIProgress(activeSection, progress, scrollY) {
       if (cachedHtml) {
         infoboxContent.innerHTML = cachedHtml;
       } else if (activeSection.infoboxHtml) {
-        fetch(`/infoboxes/${activeSection.infoboxHtml}`)
-          .then((res) => res.text())
+        fetch(`${import.meta.env.BASE_URL}infoboxes/${activeSection.infoboxHtml}`)
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.text();
+          })
           .then((html) => {
             htmlCache[activeSection.id] = html;
             infoboxContent.innerHTML = html;
-          });
+          })
+          .catch((err) => console.warn(`Could not load infobox HTML:`, err));
       }
     }
 

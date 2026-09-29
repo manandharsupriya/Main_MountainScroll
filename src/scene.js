@@ -53,7 +53,7 @@ function isImageBackground(value) {
  * and the .bg-layer size/position rules stay intact.
  */
 function toBackgroundImage(value) {
-  if (isImageBackground(value)) return `url("/patterns/${value}")`;
+  if (isImageBackground(value)) return `url("${import.meta.env.BASE_URL}patterns/${value}")`;
   if (value.includes('gradient(')) return value;
   return `linear-gradient(${value}, ${value})`;
 }
@@ -72,7 +72,7 @@ function probeMobileVariant(value) {
     mobileVariantExists[value] = true;
     if (currentBackground === value) refreshBackground();
   };
-  img.src = `/patterns/${mobileVariantName(value)}`;
+  img.src = `${import.meta.env.BASE_URL}patterns/${mobileVariantName(value)}`;
 }
 
 /**
@@ -103,7 +103,7 @@ function preloadBackgrounds(sections) {
   sections.forEach((s) => {
     if (s.background && isImageBackground(s.background)) {
       const img = new Image();
-      img.src = `/patterns/${s.background}`;
+      img.src = `${import.meta.env.BASE_URL}patterns/${s.background}`;
       resolveBackground(s.background); // on mobile, starts probing/preloading the "_mobile" version
     }
   });
@@ -160,7 +160,7 @@ export function initScene(sections) {
   const textureLoader = new THREE.TextureLoader();
 
   // Load shared textures ONCE outside the traversal to save GPU memory & CPU cycles
-  const pinTexture = textureLoader.load('/3dmodels/Pin.png');
+  const pinTexture = textureLoader.load(`${import.meta.env.BASE_URL}3dmodels/Pin.png`);
   const sharedSpriteMaterial = new THREE.SpriteMaterial({
     map: pinTexture,
     transparent: true,
@@ -168,11 +168,11 @@ export function initScene(sections) {
     sizeAttenuation: false,
   });
 
-  const mainTexture = textureLoader.load('/3dmodels/MainTexture.jpg');
+  const mainTexture = textureLoader.load(`${import.meta.env.BASE_URL}3dmodels/MainTexture.jpg`);
   mainTexture.flipY = false;
   const sharedMeshMaterial = new THREE.MeshBasicMaterial({ map: mainTexture });
 
-  loader.load('/3dmodels/MountainSceneNew.gltf', (gltf) => {
+  loader.load(`${import.meta.env.BASE_URL}3dmodels/MountainSceneNew.gltf`, (gltf) => {
     model = gltf.scene;
     scene.add(model);
 
