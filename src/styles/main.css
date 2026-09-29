@@ -158,6 +158,16 @@ html, body {
   padding-top: 0;
 }
 
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
 .hero-title {
   font-family: var(--font-palanquin);
   font-weight: 700;
@@ -168,8 +178,19 @@ html, body {
   margin: 0;
   padding: 0 1.5rem;
   text-shadow: var(--glow-shadow);
-  pointer-events: none;
-  will-change: opacity, transform;
+}
+
+.hero-subtitle {
+  font-family: var(--font-palanquin);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.4vw + 0.4rem, 1.4rem);
+  line-height: 1.35;
+  color: #ffffff;
+  text-align: center;
+  margin: clamp(0.75rem, 2vh, 1.25rem) 0 0 0;
+  padding: 0 1.5rem;
+  text-shadow: var(--glow-shadow);
+  letter-spacing: 0.03em;
 }
 
 /* ===== Subheading Section (Screen Center Anchor, Glides Vertically) ===== */

@@ -19,7 +19,7 @@
     "cameraTarget": "Marker0",
     "verticalOffset": -40,
     "rotationSpeed": 0.05,
-    "background": "#e8e8e8",
+    "background": "IntroBackdrop.jpg",
     "defaultDistance": 300,
     "polarAngle": 90,
     "backgroundFadeMs": 1000,
@@ -34,7 +34,7 @@
     "cameraTarget": "Marker0",
     "verticalOffset": 100,
     "rotationSpeed": 0.15,
-    "background": "#0f1a24",
+    "background": "Stars.jpg",
     "defaultDistance": 1200,
     "polarAngle": 30,
     "backgroundFadeMs": 1000,
@@ -49,7 +49,7 @@
     "cameraTarget": "Marker0",
     "verticalOffset": 100,
     "rotationSpeed": 0.15,
-    "background": "#0f1a24",
+    "background": "TreeCanopy.jpg",
     "defaultDistance": 1200,
     "polarAngle": 30,
     "backgroundFadeMs": 1000,
@@ -64,7 +64,7 @@
     "cameraTarget": "Marker1",
     "verticalOffset": 80,
     "rotationSpeed": 0.15,
-    "background": "#0f1a24",
+    "background": "#0c1118",
     "defaultDistance": 600,
     "polarAngle": 30,
     "backgroundFadeMs": 1000,
@@ -89,7 +89,7 @@
   },
    {
     "id": "section04",
-    "height": "180vh",
+    "height": "50vh",
     "visibleMarkers": [],
     "cameraTarget": "Marker0",
     "verticalOffset": 30,
@@ -99,8 +99,8 @@
     "polarAngle": 20,
     "backgroundFadeMs": 1000,
     "uiType": "subheading",
-    "subheading": "The Living Sanctuary",
-    "subheadingNote": "Biodiversity"
+    "subheading": "",
+    "subheadingNote": ""
   },
   {
     "id": "section04_1",
@@ -130,7 +130,7 @@
     "backgroundFadeMs": 1000,
     "uiType": "infobox",
     "infoboxTheme": "light",
-    "infoboxHtml": "biodiversity.html"
+    "infoboxHtml": "KCAP.html"
   },
     {
     "id": "section04_3",
@@ -188,9 +188,9 @@
     "defaultDistance": 800,
     "polarAngle": 60,
     "backgroundFadeMs": 1000,
-    "uiType": "infobox",
-    "infoboxTheme": "light",
-    "infoboxHtml": "cablecar_beginnings.html"
+    "uiType": "subheading",
+    "subheading": "Cable car beginnings",
+    "subheadingNote": "Cable car interests began to gain traction 2015 onward."
   },
   {
     "id": "section07_2",

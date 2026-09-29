@@ -44,7 +44,7 @@ export function setupUI(sections) {
 
   activeInfobox = document.getElementById('active-infobox');
   infoboxContent = document.getElementById('infobox-content');
-  heroTitle = document.querySelector('.hero-title');
+  heroTitle = document.querySelector('.hero-container') || document.querySelector('.hero-title');
 
   fullcoverDisplay = document.getElementById('fullcover-display');
   fullcoverContent = document.getElementById('fullcover-content');
